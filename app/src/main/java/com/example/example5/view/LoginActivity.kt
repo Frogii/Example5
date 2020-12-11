@@ -1,4 +1,4 @@
-package com.example.example5
+package com.example.example5.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import com.example.example5.R
+import com.example.example5.util.Constants.Companion.LOGIN_STRING
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.*
 
 class LoginActivity : AppCompatActivity() {
-
-    private var login = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,15 +24,14 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            login = etLogin.text.toString()
-
             GlobalScope.launch(Dispatchers.IO) {
                 showProgress()
                 delay(1500)
                 hideProgress()
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                intent.putExtra("login", login)
+                intent.putExtra(LOGIN_STRING, etLogin.text.toString())
                 startActivity(intent)
+                finish()
             }
         }
     }
@@ -44,5 +43,4 @@ class LoginActivity : AppCompatActivity() {
     private suspend fun hideProgress() = withContext(Dispatchers.Main) {
         progressBar.visibility = GONE
     }
-
 }

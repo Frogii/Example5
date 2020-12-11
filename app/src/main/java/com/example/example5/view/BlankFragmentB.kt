@@ -1,22 +1,23 @@
-package com.example.example5
+package com.example.example5.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.example5.R
+import com.example.example5.util.Constants.Companion.SEARCH_STRING
 import kotlinx.android.synthetic.main.fragment_blank_b.*
 
 
 class BlankFragmentB : Fragment() {
 
-    var search = ""
 
-    companion object{
-        fun newInstance(string: String): BlankFragmentB{
+    companion object {
+        fun newInstance(string: String): BlankFragmentB {
             val fragment = BlankFragmentB()
             val bundle = Bundle()
-            bundle.putString("search", string)
+            bundle.putString(SEARCH_STRING, string)
             fragment.arguments = bundle
             return fragment
         }
@@ -26,13 +27,13 @@ class BlankFragmentB : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_blank_b, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        search = arguments?.getString("search").toString()
-        tvFragmentB.text = search
+        arguments?.getString(SEARCH_STRING).let {
+            tvFragmentB.text = it
+        }
     }
 }

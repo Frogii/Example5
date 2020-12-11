@@ -1,4 +1,4 @@
-package com.example.example5
+package com.example.example5.util
 
 interface Communicator {
 
